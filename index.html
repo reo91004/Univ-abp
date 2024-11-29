@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>전라북도 지표 웹사이트</title>
+    <link rel="stylesheet" href="src/styles.css">
+    <script type="text/javascript"
+        src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=z3yb0x08p3"></script>
+</head>
+
+<body>
+    <div id="navbar">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+    </div>
+
+    <div class="container">
+        <h1>전라북도 사회기반시설 산업화 및 혁신</h1>
+        <p>2012년부터 2022년까지의 통계입니다..</p>
+
+        <div id="tabs">
+            <div class="tab-button" data-tab="A9_1_1_사계절도로접근성비율">사계절 도로 접근성 비율</div>
+            <div class="tab-button" data-tab="A9_1_2_운송량">운송량</div>
+            <div class="tab-button" data-tab="A9_2_1_제조업부가가치비율">제조업 부가가치 비율</div>
+            <div class="tab-button" data-tab="A9_2_2_제조업고용비율">제조업 고용 비율</div>
+            <div class="tab-button" data-tab="A9_4_1_이산화탄소배출량">이산화탄소 배출량</div>
+            <div class="tab-button" data-tab="A9_5_1_연구개발비비율">연구개발비 비율</div>
+            <div class="tab-button" data-tab="A9_5_2_연구원수">연구원 수</div>
+        </div>
+    </div>
+
+    <div id="chart-map-container"
+        style="display: flex; width: 100%; flex-direction: row; align-items: flex-start; gap: 20px; justify-content: space-around;">
+        <div id="chart-container">
+            <canvas id="energyChart"></canvas>
+        </div>
+        <div id="map"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="src/script.js"></script>
+</body>
+
+</html>
