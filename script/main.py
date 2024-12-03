@@ -100,5 +100,5 @@ def visualization():
 
 
 if __name__ == "__main__":
-    createDatabase()
+    # createDatabase()
     visualization()

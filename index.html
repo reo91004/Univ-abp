@@ -8,6 +8,51 @@
     <link rel="stylesheet" href="src/styles.css">
     <script type="text/javascript"
         src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=z3yb0x08p3"></script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
+        import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAEbozruGS6f9G7SRBOwmazQZjsPDODIoY",
+            authDomain: "abp-sdgs.firebaseapp.com",
+            projectId: "abp-sdgs",
+            storageBucket: "abp-sdgs.firebasestorage.app",
+            messagingSenderId: "1029076477606",
+            appId: "1:1029076477606:web:29d7f8ec49733b8a2df667"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        async function loadDataFromFirestore() {
+            const querySnapshot = await getDocs(collection(db, "T9_IndustryInnovationInfrastruc"));
+            const data = [];
+            querySnapshot.forEach((doc) => {
+                data.push(doc.data());
+            });
+            return data;
+        }
+
+        function displayData(data) {
+            const container = document.getElementById("data-container");
+            container.innerHTML = "";
+
+            data.forEach((item) => {
+                const itemElement = document.createElement("div");
+                itemElement.className = "data-item";
+                itemElement.innerHTML = `
+                    <p>ID: ${item.id}</p>
+                    <p>년도: ${item.년도}</p>
+                    <p>사계절 도로 접근성 비율: ${item.A9_1_1_사계절도로접근성비율}</p>
+                `;
+                container.appendChild(itemElement);
+            });
+        }
+
+        loadDataFromFirestore().then((data) => {
+            displayData(data);
+        });
+    </script>
 </head>
 
 <body>
@@ -42,7 +87,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="src/script.js"></script>
+    <script type="module" src="src/script.js"></script>
 </body>
 
 </html>
