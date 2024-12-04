@@ -65,23 +65,50 @@ def visualization():
     conn.close()
 
     # 결측값 제거
-    data1 = data1.dropna()
-    data2 = data2.dropna()
+    # data1 = data1.dropna()
+    # data2 = data2.dropna()
 
-    # T9_IndustryInnovationInfrastruc 데이터 시각화
-    plt.figure(figsize=(10, 6))
+    # 연도 범위 확인
+    print("데이터에 포함된 연도:", data1["년도"].unique())
+
+    # 연도 컬럼을 정수로 변환
+    data1["년도"] = data1["년도"].astype(int)
+
+    # 2012 ~ 2023년 전체 연도 생성
+    full_years = pd.DataFrame({"년도": range(2012, 2024)})
+
+    # 연도를 기준으로 데이터 병합 (결측치 포함)
+    data1 = pd.merge(full_years, data1, on="년도", how="left")
+
+    # 각 열에 대해 개별 차트 생성
     for column in data1.columns:
         if column != "년도":
-            plt.plot(
-                data1["년도"], data1[column], label=column, marker="o", linestyle="-"
-            )
+            # 열 데이터를 숫자로 변환하며 오류 발생 시 NaN으로 처리
+            data1[column] = pd.to_numeric(data1[column], errors="coerce")
 
-    plt.title("T9: 산업 혁신 인프라 - 데이터 전체 표시")
-    plt.xlabel("년도")
-    plt.ylabel("값")
-    plt.legend(loc="upper left", bbox_to_anchor=(1, 1))
-    plt.tight_layout()
-    plt.show()
+            plt.figure(figsize=(12, 6))
+            plt.plot(
+                data1["년도"],
+                data1[column],
+                label=column,
+                marker="o",
+                linestyle="-",
+                color="red",
+            )
+            plt.title(f"{column} - 데이터 시각화")
+            plt.xlabel("년도")
+            plt.ylabel("값")
+
+            # y축 범위 설정: 데이터가 비어있지 않을 때만 실행
+            if not data1[column].isna().all():
+                y_min = data1[column].min() - 0.01
+                y_max = data1[column].max() + 0.01
+                plt.ylim(y_min, y_max)
+
+            plt.legend(loc="upper left")
+            plt.grid(True, linestyle="--", alpha=0.7)
+            plt.tight_layout()
+            plt.show()
 
     # # T8_EconomicGrowthIndicators 데이터 시각화
     # plt.figure(figsize=(10, 6))
@@ -100,5 +127,5 @@ def visualization():
 
 
 if __name__ == "__main__":
-    # createDatabase()
+    createDatabase()
     visualization()
