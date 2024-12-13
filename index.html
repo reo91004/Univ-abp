@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>전라북도 지표 웹사이트</title>
+
+    <!-- 세련된 폰트 및 아이콘 -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="src/styles.css" />
+
+    <script src="env.js"></script> <!-- Firebase 구성 환경 변수 -->
+    <script type="text/javascript"
+        src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=z3yb0x08p3"></script>
+</head>
+
+<body>
+    <header>
+        <div class="logo">전라북도 지표 대시보드</div>
+        <nav id="navbar">
+            <a href="index.html" class="active">Home</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <div class="main-container">
+        <aside class="sidebar">
+            <h2>지표 카테고리</h2>
+            <ul id="dataset-list">
+                <!-- JavaScript로 동적 생성: 
+                     예) <li data-dataset="T01_PovertyIndicators">빈곤 지표 (T01)</li>
+                 -->
+            </ul>
+        </aside>
+
+        <section class="content">
+            <h1 id="main-title">전라북도 지표 분석</h1>
+            <p id="main-description">2012년부터 2022년까지의 다양한 지속가능발전목표(SDGs) 관련 지표를 확인할 수 있습니다.</p>
+
+            <div id="tabs" class="tabs-container">
+                <!-- 지표 선택 탭들이 동적으로 생성됩니다 -->
+            </div>
+
+            <div id="chart-map-container">
+                <div id="chart-container">
+                    <canvas id="indicatorChart"></canvas>
+                </div>
+                <div id="map"></div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>© 2024 전라북도 지표 웹사이트</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="module" src="src/script.js"></script>
+</body>
+
+</html>

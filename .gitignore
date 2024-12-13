@@ -1,0 +1,6 @@
+script/abp-sdgs-firebase-adminsdk-fbdul-bf15550536.json
+# Firebase service account key
+*.json
+.env
+.DS_Store
+env.js
